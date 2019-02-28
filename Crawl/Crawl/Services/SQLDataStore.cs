@@ -166,8 +166,15 @@ namespace Crawl.Services
 
         public async Task<Item> GetAsync_Item(string id)
         {
-            // Implement
-            return null;
+            try
+            {
+                var result = await App.Database.GetAsync<Item>(id);
+                return result;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<IEnumerable<Item>> GetAllAsync_Item(bool forceRefresh = false)
