@@ -205,6 +205,7 @@ namespace Crawl.Views
             //ItemsController.Instance.GetItemsFromGame(int number, int level, AttributeEnum attribute, ItemLocationEnum location, bool random, bool updateDataBase)
 
             // Implement calling GetItemsFromGame into myDataList.  Remember to Await the call.
+            var result = await ItemsController.Instance.GetItemsFromGame(number, level, attribute, location, random, updateDataBase);
 
             if (myDataList != null && myDataList.Count > 0)
             {
