@@ -56,13 +56,15 @@ namespace Crawl.Controllers
             }
 
             // Then update the database
-
             // Use a foreach on myList
+            foreach(var item in myList)
+            {
+                await SQLDataStore.Instance.InsertUpdateAsync_Item(item);
+            }
 
-            // Implement
 
             // When foreach is done, call to the items view model to set needs refresh to true, so it can refetch the list...
-            // Implement
+            ItemsViewModel.Instance.SetNeedsRefresh(true);
 
             return myList;
         }
@@ -116,12 +118,11 @@ namespace Crawl.Controllers
                 foreach (var item in myList)
                 {
                     // Call to the View Model (that is where the datasource is set, and have it then save
-                    // await abcdefg;
-                    // Implement
+                    await SQLDataStore.Instance.InsertUpdateAsync_Item(item);
                 }
 
                 // When foreach is done, call to the items view model to set needs refresh to true, so it can refetch the list...
-                // Implement
+                
             }
 
             return myList;
