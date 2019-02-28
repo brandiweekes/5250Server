@@ -93,8 +93,9 @@ namespace Crawl.Controllers
             {
                 { "Number", number.ToString()},
                 { "Attribute", ((int)attribute).ToString()},
-                // Implement missing paramaters...
-
+                { "Level", level.ToString() },
+                { "Random", random.ToString()},
+                { "Location", ((int)location).ToString() }
             };
 
             // Convert parameters to a key value pairs to a json object
@@ -122,7 +123,7 @@ namespace Crawl.Controllers
                 }
 
                 // When foreach is done, call to the items view model to set needs refresh to true, so it can refetch the list...
-                
+                ItemsViewModel.Instance.SetNeedsRefresh(true);
             }
 
             return myList;
