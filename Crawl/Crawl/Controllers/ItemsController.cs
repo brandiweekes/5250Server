@@ -43,7 +43,7 @@ namespace Crawl.Controllers
 
             // Needs to get items from the server
 
-            var URLComponent = "XYZ/";
+            var URLComponent = "GetItemPostList/";
 
             var DataResult = await HttpClientService.Instance.GetJsonGetAsync(WebGlobals.WebSiteAPIURL + URLComponent + parameter);
 
@@ -167,10 +167,18 @@ namespace Crawl.Controllers
 
             try
             {
+                myData.Name = JsonHelper.GetJsonString(json, "Name");
+                myData.Description = JsonHelper.GetJsonString(json, "Description");
+                myData.ImageURI = JsonHelper.GetJsonString(json, "ImageURI");
+
                 myData.Guid = JsonHelper.GetJsonString(json, "Guid");
                 myData.Id = myData.Guid;    // Set to be the same as Guid, does not come down from server, but needed for DB
 
-                // Look in JsonHelper for more types...
+                myData.Value = JsonHelper.GetJsonInteger(json, "Value");
+                myData.Range = JsonHelper.GetJsonInteger(json, "Range");
+
+                myData.Location = (ItemLocationEnum)JsonHelper.GetJsonInteger(json, "Location");
+                myData.Attribute = (AttributeEnum)JsonHelper.GetJsonInteger(json, "Attribute");
 
             }
 
