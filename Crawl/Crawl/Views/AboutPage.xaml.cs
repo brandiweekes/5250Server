@@ -168,8 +168,8 @@ namespace Crawl.Views
                 // The ServerItemValue Code stands for the batch of items to get
                 // as the group to request.  1, 2, 3, 100 (All), or if not specified All
 
-                // 1. Take the value from ServerItemValue.Text, Convert to an ToInt32 and save it in a variable
-                // 2. set myDataList = await ItemsController.Instance.GetItemsFromServer passing the variable
+                var serverValue = Convert.ToInt32(ServerItemValue.Text);
+                myDataList = await ItemsController.Instance.GetItemsFromServer(serverValue);
 
                 if (myDataList != null && myDataList.Count > 0)
                 {
@@ -205,7 +205,7 @@ namespace Crawl.Views
             //ItemsController.Instance.GetItemsFromGame(int number, int level, AttributeEnum attribute, ItemLocationEnum location, bool random, bool updateDataBase)
 
             // Implement calling GetItemsFromGame into myDataList.  Remember to Await the call.
-            var result = await ItemsController.Instance.GetItemsFromGame(number, level, attribute, location, random, updateDataBase);
+            myDataList = await ItemsController.Instance.GetItemsFromGame(number, level, attribute, location, random, updateDataBase);
 
             if (myDataList != null && myDataList.Count > 0)
             {
