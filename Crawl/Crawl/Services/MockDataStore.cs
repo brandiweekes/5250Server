@@ -126,7 +126,7 @@ namespace Crawl.Services
             var UpdateResult = await UpdateAsync_Item(data);
             if (UpdateResult)
             {
-                await AddAsync_Item(data);
+                //await AddAsync_Item(data);
                 return true;
             }
 

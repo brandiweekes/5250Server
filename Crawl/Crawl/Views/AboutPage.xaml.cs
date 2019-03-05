@@ -180,7 +180,7 @@ namespace Crawl.Views
                     {
                         // Add them line by one, use \n to force new line for output display.
                         // Build up the output string by adding formatted Item Output
-                        myOutput += "//implement call item formatter" + "\n";
+                        myOutput += item.FormatOutput() + "\n";
                     }
                 }
 

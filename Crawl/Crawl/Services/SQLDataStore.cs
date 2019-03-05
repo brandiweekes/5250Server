@@ -136,7 +136,7 @@ namespace Crawl.Services
             var UpdateResult = await UpdateAsync_Item(data);
             if (UpdateResult)
             {
-                await AddAsync_Item(data);
+                //await AddAsync_Item(data);
                 return true;
             }
 
@@ -145,22 +145,31 @@ namespace Crawl.Services
 
         public async Task<bool> AddAsync_Item(Item data)
         {
-            // Implement
-
+            var result = await App.Database.InsertAsync(data);
+            if(result == 1)
+            {
+                return true;
+            }
             return false;
         }
 
         public async Task<bool> UpdateAsync_Item(Item data)
         {
-            // Implement
-
+            var result = await App.Database.UpdateAsync(data);
+            if(result == 1)
+            {
+                return true;
+            }
             return false;
         }
 
         public async Task<bool> DeleteAsync_Item(Item data)
         {
-            // Implement
-
+            var result = await App.Database.DeleteAsync(data);
+            if(result == 1)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -168,7 +177,8 @@ namespace Crawl.Services
         {
             try
             {
-                var result = await App.Database.GetAsync<Item>(id);
+                var tempResult = await App.Database.GetAsync<Item>(id);
+                var result = tempResult;
                 return result;
             }
             catch(Exception ex)
@@ -179,8 +189,14 @@ namespace Crawl.Services
 
         public async Task<IEnumerable<Item>> GetAllAsync_Item(bool forceRefresh = false)
         {
-            // Implement
-            return null;
+            var tempResult = await App.Database.Table<Item>().ToArrayAsync();
+
+            var result = new List<Item>();
+            foreach(var item in tempResult)
+            {
+                result.Add(item);
+            }
+            return result;
         }
         #endregion Item
 

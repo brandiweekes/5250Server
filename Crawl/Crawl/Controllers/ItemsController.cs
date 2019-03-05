@@ -43,7 +43,7 @@ namespace Crawl.Controllers
 
             // Needs to get items from the server
 
-            var URLComponent = "GetItemPostList/";
+            var URLComponent = "GetItemList/";
 
             var DataResult = await HttpClientService.Instance.GetJsonGetAsync(WebGlobals.WebSiteAPIURL + URLComponent + parameter);
 
@@ -59,7 +59,7 @@ namespace Crawl.Controllers
             // Use a foreach on myList
             foreach(var item in myList)
             {
-                await SQLDataStore.Instance.InsertUpdateAsync_Item(item);
+                await ItemsViewModel.Instance.InsertUpdateAsync(item);
             }
 
 
@@ -86,7 +86,7 @@ namespace Crawl.Controllers
 
             // Needs to get items from the server
 
-            var URLComponent = "GetItemListPost/";
+            var URLComponent = "GetItemListPost";
 
 
             var dict = new Dictionary<string, string>
@@ -119,7 +119,7 @@ namespace Crawl.Controllers
                 foreach (var item in myList)
                 {
                     // Call to the View Model (that is where the datasource is set, and have it then save
-                    await SQLDataStore.Instance.InsertUpdateAsync_Item(item);
+                    await ItemsViewModel.Instance.InsertUpdateAsync(item);
                 }
 
                 // When foreach is done, call to the items view model to set needs refresh to true, so it can refetch the list...
